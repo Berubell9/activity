@@ -1,0 +1,47 @@
+{% extends "backend/layout.html" %}
+
+{% block content %}
+<!-- ตารางบทความ -->
+<div class="block full">
+    <!-- All Title -->
+    <div class="block-title">
+        <div class="block-options pull-right">
+            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+        </div>
+        <h2><strong>กิจกรรมทั้งหมด</strong></h2>
+    </div>
+    <!-- Title -->
+
+    <!--Content -->
+    <table id="ecom-products" class="table table-bordered table-striped table-vcenter">
+        <thead>
+            <tr>
+                <th class="text-center" style="width: 70px;">รหัส</th>
+                <th>ภาพปก</th>
+                <th class="text-right hidden-xs">ชื่อกิจกรรม</th>
+                <th class="hidden-xs">ยอดเข้าชม (View)</th>
+                <th class="hidden-xs text-center">หมวดหมู่กิจกรรม</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for blog in blogs %}
+            <tr>
+                <td class="text-center">{{blog.id}}</td>
+                <td><img src="{{blog.image.url}}" style ="width: 60px; height: 50px;" alt=""></td>
+                <td class="text-right hidden-xs"><strong>{{blog.name}}</strong></td>
+                <td class="text-center">{{blog.views}}</td>
+                <td class="hidden-xs text-center">{{blog.category}}</td>
+                <td class="text-center">
+                    <div class="btn-group btn-group-xs">
+                        <a href="{% url 'editData' blog.id %}" data-toggle="tooltip" title="Edit" class="btn btn-default"><i class="fa fa-pencil"></i></a>
+                        <a href="{% url 'deleteData' blog.id %}" data-toggle="tooltip" onclick = "return confirm('คุณต้องการลบกิจกรรมนี้หรือไม่ ?')"title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                    </div>
+                </td>
+            {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+    <!-- END All Products Content -->
+</div>
+{% endblock %}
